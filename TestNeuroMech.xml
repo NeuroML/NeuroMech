@@ -1,13 +1,9 @@
-TestNeuroMech:
-    bodies:
-        forelimb:
-            muscles:
-                bicep:
-                    start:
-                        x: 0.0
-                        y: 0.0
-                        z: 0.0
-                    end:
-                        x: 10.0
-                        y: 10.0
-                        z: 0.0
+<?xml version="1.0" encoding="UTF-8"?>
+<neuromech xmlns="http://www.neuromech.org/schema/neuromlech" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="TestNeuroMech" xsi:schemaLocation="http://www.neuromech.org/schema/neuromlech https://raw.github.com/NeuroML/NeuroMech/development/NeuroMech_v0.1.xsd">
+    <body id="forelimb">
+        <muscle id="bicep">
+            <start x="0.0" y="0.0" z="0.0"/>
+            <end x="10.0" y="10.0" z="0.0"/>
+        </muscle>
+    </body>
+</neuromech>

@@ -4,7 +4,7 @@ from modelspec.base_types import Base
 from typing import List
 import sys
 
-# Initial ideas for NeuroMech specification  
+# Initial ideas for NeuroMech specification
 
 
 @modelspec.define
@@ -18,6 +18,7 @@ class point3d(Base):
     x: float = field(validator=instance_of(float))
     y: float = field(validator=instance_of(float))
     z: float = field(validator=instance_of(float))
+
 
 @modelspec.define
 class muscle(Base):
@@ -71,38 +72,30 @@ class neuromech(Base):
         validator=instance_of(str),
         default="http://www.neuromech.org/schema/neuromlech https://raw.github.com/NeuroML/NeuroMech/development/NeuroMech_v0.1.xsd",
     )
-    
+
     bodies: List[body] = field(factory=list)
 
 
 if __name__ == "__main__":
     nmc_doc = neuromech(id="TestNeuroMech")
 
-    p1 = point3d(0.,0.,0.)
-    p2 = point3d(10.,10.,0.)
+    p1 = point3d(0.0, 0.0, 0.0)
+    p2 = point3d(10.0, 10.0, 0.0)
 
-    muscle1 = muscle('bicep', p1,p2)
-    body1 = body('forelimb')
+    muscle1 = muscle("bicep", p1, p2)
+    body1 = body("forelimb")
     body1.muscles.append(muscle1)
 
     nmc_doc.bodies.append(body1)
 
-
     print(nmc_doc)
 
     nmc_doc.to_json_file("%s.json" % nmc_doc.id)
-    nmc_doc.to_yaml_file("%s.xml" % nmc_doc.id)
+    nmc_doc.to_xml_file("%s.xml" % nmc_doc.id)
     nmc_doc.to_yaml_file("%s.yaml" % nmc_doc.id)
     print(" >> Full document details in YAML format:\n")
     print(nmc_doc.to_yaml())
-    '''
-
-    nmc_doc.to_bson_file("%s.bson" % nmc_doc.id)
-
-    if sys.version_info >= (3, 8):
-        nmc_doc.to_xml_file("%s.xml" % nmc_doc.id)
-        print(" >> Full document details in XML format:\n")
-        print(nmc_doc.to_xml())
+    """
 
     print("Generating documentation...")
 
@@ -135,4 +128,4 @@ if __name__ == "__main__":
     from modelspec.utils import load_xml
 
     new_neuroml = load_xml("hello_world_neuroml.net.nml")
-    print(new_neuroml)'''
+    print(new_neuroml)"""
