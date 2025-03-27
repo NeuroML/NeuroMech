@@ -1,2 +1,3 @@
 # NeuroMech
-Tests on the NeuroMech language for neuromusculoskeletal model specifications
+
+Preliminary ideas/tests/examples for the NeuroMech language for neuromusculoskeletal model specifications.
