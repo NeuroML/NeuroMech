@@ -31,7 +31,7 @@ jobs:
     - name: Test some scripts
       run: |
         echo "Running tests..."
-        ./tests.sh
+        ./test.sh
 
     - name: Final information on installed packages
       run: |
