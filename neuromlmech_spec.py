@@ -1,14 +1,29 @@
 import modelspec
 from modelspec import field, instance_of, optional
 from modelspec.base_types import Base
-from typing import List
+from typing import List, Optional, Dict, Any
 import sys
 
 # Initial ideas for NeuroMech specification
 
 
+@modelspec.define(eq=False)
+class NeuroMechBase(Base):
+    """
+    Base class for all NeuroMech core classes that implements common functionality.
+
+    Attributes:
+        metadata: Optional metadata field, an arbitrary dictionary of string keys and JSON serializable values.
+
+    """
+
+    metadata: Optional[Dict[str, Any]] = field(
+        kw_only=True, default=None, validator=optional(instance_of(dict))
+    )
+
+
 @modelspec.define
-class point3d(Base):
+class point3d(NeuroMechBase):
     """
     Some description...
 
@@ -21,7 +36,7 @@ class point3d(Base):
 
 
 @modelspec.define
-class muscle(Base):
+class muscle(NeuroMechBase):
     """
     Some description...
 
@@ -36,7 +51,7 @@ class muscle(Base):
 
 
 @modelspec.define
-class body(Base):
+class body(NeuroMechBase):
     """
     Some description...
 
@@ -52,7 +67,7 @@ class body(Base):
 
 
 @modelspec.define
-class neuromech(Base):
+class neuromech(NeuroMechBase):
     """
     Some description...
 
@@ -77,7 +92,9 @@ class neuromech(Base):
 
 
 if __name__ == "__main__":
-    nmc_doc = neuromech(id="TestNeuroMech")
+    nmc_doc = neuromech(
+        id="TestNeuroMech", metadata={"description": "Testing a NeuroMech document"}
+    )
 
     p1 = point3d(0.0, 0.0, 0.0)
     p2 = point3d(10.0, 10.0, 0.0)
