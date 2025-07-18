@@ -1,6 +1,6 @@
 TestNeuroMech:
     metadata:
-        description: Test NeuroMech document
+        description: Testing a NeuroMech document
     bodies:
         forelimb:
             muscles:
