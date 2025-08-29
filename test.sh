@@ -5,3 +5,5 @@ set -ex
 ruff format *.py
 
 python neuromlmech_spec.py
+
+python mujoco_test.py

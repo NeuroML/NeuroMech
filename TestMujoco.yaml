@@ -1,0 +1,6 @@
+model: TestMujoco
+metadata:
+    description: Testing a Mujoco document
+worldbodies:
+-   lights:
+    -   directional: 'true'
