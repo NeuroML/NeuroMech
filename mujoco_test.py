@@ -30,7 +30,48 @@ class light(MujocoBase):
     Args:
     """
 
-    directional: str = field(validator=instance_of(str))
+    directional: str = field(default=None, validator=optional(instance_of(str)))
+    diffuse: str = field(default=None, validator=optional(instance_of(str)))
+    pos: str = field(default=None, validator=optional(instance_of(str)))
+    dir: str = field(default=None, validator=optional(instance_of(str)))
+
+
+@modelspec.define
+class geom(MujocoBase):
+    """
+    Some description...
+
+    Args:
+    """
+
+    type: str = field(validator=instance_of(str))
+    size: str = field(default=None, validator=optional(instance_of(str)))
+    rgba: str = field(default=None, validator=optional(instance_of(str)))
+
+
+@modelspec.define
+class joint(MujocoBase):
+    """
+    Some description...
+
+    Args:
+    """
+
+    type: str = field(validator=instance_of(str))
+
+
+@modelspec.define
+class body(MujocoBase):
+    """
+    Some description...
+
+    Args:
+    """
+
+    pos: str = field(validator=instance_of(str))
+
+    joints: List[joint] = field(factory=list)
+    geoms: List[geom] = field(factory=list)
 
 
 @modelspec.define
@@ -42,6 +83,8 @@ class worldbody(MujocoBase):
     """
 
     lights: List[light] = field(factory=list)
+    geoms: List[geom] = field(factory=list)
+    bodies: List[body] = field(factory=list)
 
 
 @modelspec.define
@@ -76,11 +119,21 @@ if __name__ == "__main__":
     )
 
     worldbody1 = worldbody()
-    light1 = light(directional="true")
 
-    worldbody1.lights.append(light1)
+    worldbody1.lights.append(light(diffuse=".5 .5 .5", pos="0 0 3", dir="0 0 -1"))
+    worldbody1.geoms.append(geom(type="plane", size="10 1 0.1", rgba="0 0.9 0 1"))
 
     nmc_doc.worldbodies.append(worldbody1)
+
+    body0 = body(pos="0 0 1")
+    body0.joints.append(joint(type="free"))
+    body0.geoms.append(geom(type="box", size="0.1 0.1 0.1", rgba="1 0 0 1"))
+    worldbody1.bodies.append(body0)
+
+    body1 = body(pos="0.3 0.3 1.5")
+    body1.joints.append(joint(type="free"))
+    body1.geoms.append(geom(type="sphere", size="0.15", rgba="1 1 0 1"))
+    worldbody1.bodies.append(body1)
 
     print(nmc_doc)
 

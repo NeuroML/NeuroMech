@@ -3,4 +3,25 @@ metadata:
     description: Testing a Mujoco document
 worldbodies:
 -   lights:
-    -   directional: 'true'
+    -   diffuse: .5 .5 .5
+        pos: 0 0 3
+        dir: 0 0 -1
+    geoms:
+    -   type: plane
+        size: 10 1 0.1
+        rgba: 0 0.9 0 1
+    bodies:
+    -   pos: 0 0 1
+        joints:
+        -   type: free
+        geoms:
+        -   type: box
+            size: 0.1 0.1 0.1
+            rgba: 1 0 0 1
+    -   pos: 0.3 0.3 1.5
+        joints:
+        -   type: free
+        geoms:
+        -   type: sphere
+            size: '0.15'
+            rgba: 1 1 0 1
